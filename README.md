@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Inventory Management System
+ Inventory Management System es una aplicación web desarrollada en Laravel para gestionar el inventario de productos de las cafeterías de la empresa KONECTA. Este sistema permite la creación, edición, eliminación y listado de productos, así como la realización de ventas y consultas directas en la base de datos.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Características principales
 
-## About Laravel
+- Creación, edición, eliminación y listado de productos.
+- Registro de ventas y actualización automática del stock.
+- Consultas directas en la base de datos para conocer el producto con más stock y el producto más vendido.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requisitos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP >= 8.2
+- Composer
+- Laravel >= 10.x
+- POSGREST, MySQL o cualquier otro sistema de gestión de bases de datos compatible con Laravel.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalación
 
-## Learning Laravel
+1. Clona el repositorio desde GitHub:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   ```bash
+   git clone https://github.com/oscarfiscal/-coffee_shops.git
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 2. Instala las dependencias de Composer:
+ ```bash
+  cd coffee_shops
+```
+```bash
+  composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 3. Copia el archivo .env.example
+```bash
+cp .env.example .env
+```
 
-## Laravel Sponsors
+## 4. Genera la clave de la aplicación:
+```bash
+php artisan key:generate
+```
+## 5. Ejecuta las migraciones para crear las tablas necesarias en la base de datos::
+```bash
+php artisan migrate
+```
+## 5. Inicia el servidor de desarrollo:
+```bash
+php artisan serve
+```
+## 6.Visita http://localhost:8000 en tu navegador para acceder al sistema
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Funcionalidades de la Aplicación
 
-### Premium Partners
+Una vez que la aplicación esté instalada y en funcionamiento, tendrás acceso a las siguientes funcionalidades:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Gestión de Productos
 
-## Contributing
+Esta funcionalidad te permite administrar los productos de tu inventario. Puedes realizar las siguientes operaciones:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Crear nuevos productos.
+- Editar la información de productos existentes.
+- Eliminar productos del inventario.
+- Listar todos los productos disponibles.
 
-## Code of Conduct
+Cada producto debe contener la siguiente información:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Nombre del producto.
+- Referencia única.
+- Precio unitario.
+- Peso del producto.
+- Categoría a la que pertenece.
+- Cantidad disponible en stock.
+- Fecha de creación del producto.
 
-## Security Vulnerabilities
+### Venta de Productos
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Esta función te permite realizar la venta de productos desde tu inventario. Para llevar a cabo una venta, necesitas especificar el ID del producto que deseas vender y la cantidad que se va a vender. El sistema realizará automáticamente las siguientes acciones:
 
-## License
+- Actualizará el stock del producto después de la venta.
+- Registrará la venta realizada en el historial.
+- Si el producto no tiene suficiente stock para satisfacer la venta solicitada, se mostrará un mensaje informando que la venta no puede ser procesada.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Consultas Directas en la Base de Datos
+
+Se incluyen dos consultas directas en la base de datos para obtener información relevante:
+
+### Producto con Más Stock
+
+Esta consulta permite conocer cuál es el producto que tiene más unidades en stock. 
+
+### Producto Más Vendido
+
+Esta consulta permite conocer cuál es el producto que ha sido mas vendido
+
+
+
+
+
+
+    
+
