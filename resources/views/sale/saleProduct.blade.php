@@ -13,24 +13,33 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="table-responsive-sm table-responsive-md">
-                <form action="" method="POST" class="p-5 bg-white rounded-lg shadow-lg">
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+
+                <form action="{{ route('sales.store') }}" method="POST" class="p-5 bg-white rounded-lg shadow-lg" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="producto" class="form-label">Selecciona el producto:</label>
-                        <select class="form-select" id="producto" name="producto_id">
+                        <select class="form-select" id="producto" name="product_id">
                             <option value="" disabled selected>Selecciona un producto</option>
                             @foreach ($products as $product)
-                            <option value="{{ $product->id }}" data-cantidad="{{ $product->stock }}">{{ $product->name }}</option>
+                            <option value="{{ $product->id }}" data-quantity="{{ $product->stock }}">{{ $product->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3" id="cantidad" style="display: none;">
+                    <div class="mb-3" id="quantity" style="display: none;">
                         <label for="cantidadInput" class="form-label">Cantidad en stock:</label>
                         <input type="text" class="form-control" id="cantidadInput" placeholder="Cantidad en stock" readonly>
                     </div>
                     <div class="mb-3" id="cantidadVenta" style="display: none;">
                         <label for="cantidadVentaInput" class="form-label">Cantidad a vender:</label>
-                        <input type="number" class="form-control" id="cantidadVentaInput" name="cantidad" placeholder="Cantidad a vender" min="1" required>
+                        <input type="number" class="form-control" id="cantidadVentaInput" name="quantity" placeholder="Cantidad a vender" min="1" required>
+                    </div>
+                    <div id="errorStock" class="alert alert-danger" style="display: none;">
+                        No hay suficiente stock disponible para esta venta.
                     </div>
                     <button type="submit" class="btn btn-primary" id="btnVender" style="display: none;">Vender</button>
                 </form>
@@ -39,23 +48,23 @@
     </div>
 </body>
 
-</html>
-
-
-
 <script>
-    // Función para mostrar el campo de cantidad y cantidad a vender cuando se selecciona un producto
+    // Función para mostrar el campo de quantity y quantity a vender cuando se selecciona un producto
     document.getElementById('producto').addEventListener('change', function() {
-        var cantidad = this.options[this.selectedIndex].getAttribute('data-cantidad');
-        if (cantidad) {
-            document.getElementById('cantidadInput').value = cantidad;
-            document.getElementById('cantidad').style.display = 'block';
+        var quantity = this.options[this.selectedIndex].getAttribute('data-quantity');
+        if (quantity > 0) {
+            document.getElementById('cantidadInput').value = quantity;
+            document.getElementById('quantity').style.display = 'block';
             document.getElementById('cantidadVenta').style.display = 'block';
             document.getElementById('btnVender').style.display = 'block';
+            document.getElementById('errorStock').style.display = 'none';
         } else {
-            document.getElementById('cantidad').style.display = 'none';
+            document.getElementById('quantity').style.display = 'none';
             document.getElementById('cantidadVenta').style.display = 'none';
             document.getElementById('btnVender').style.display = 'none';
+            document.getElementById('errorStock').style.display = 'block';
         }
     });
 </script>
+
+</html>
