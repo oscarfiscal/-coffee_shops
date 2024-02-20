@@ -40,6 +40,18 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'El nombre del producto es obligatorio.',
+            'reference.required' => 'La referencia del producto es obligatoria.',
+            'reference.unique' => 'La referencia del producto ya existe.',
+            'price.required' => 'El precio del producto es obligatorio.',
+            'price.integer' => 'El precio del producto debe ser un número entero.',
+            'price.min' => 'El precio del producto no puede ser negativo.',
+            'weight.required' => 'El peso del producto es obligatorio.',
+            'weight.integer' => 'El peso del producto debe ser un número entero.',
+            'weight.min' => 'El peso del producto no puede ser negativo.',
+            'category.required' => 'La categoría del producto es obligatoria.',
+            'stock.required' => 'El stock del producto es obligatorio.',
+            'stock.integer' => 'El stock del producto debe ser un número entero.',
+            'stock.min' => 'El stock del producto no puede ser negativo.',
         ];
     }
 }

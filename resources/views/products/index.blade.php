@@ -26,6 +26,7 @@
                             <th scope="col">Peso</th>
                             <th scope="col">Categoria</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Fecha De Creacion</th>
 
 
                         </tr>
@@ -39,6 +40,7 @@
                             <td scope="row">{{$product->weight}}</td>
                             <td scope="row">{{$product->category}}</td>
                             <td scope="row">{{$product->stock}}</td>
+                            <td scope="row">{{$product->created_at}}</td>
                             </form>
                             </td>
                         </tr>
