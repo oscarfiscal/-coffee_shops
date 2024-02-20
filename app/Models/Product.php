@@ -25,4 +25,9 @@ class Product extends Model
         'stock' => 'integer',
         'created_at' => 'date',
     ];
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
 }

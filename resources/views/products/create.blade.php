@@ -58,6 +58,7 @@
                                 <p class="text-red-500 text-xs italic mt-1">{{ $errors->first('stock') }}</p>
                             @endif
                         </div>
+                    </div>
 
                         <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
                             <a href="{{ route('products.index') }}" class='w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Cancelar</a>

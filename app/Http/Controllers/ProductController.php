@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Models\Sale;
+use App\Services\ProductService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -13,13 +17,17 @@ class ProductController extends Controller
      */
 
     public function __construct(
-        private Product $product
+        private Product $product,
+        private ProductService $productService
     ) {
     }
-    public function index()
+    public function index(): View
     {
+        $productMaxStock = $this->productService->getProductWithMaxStock();
+        $productMaxSold = $this->productService->getProductWithMaxSales();
+
         $products = Product::paginate(5);
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'productMaxStock', 'productMaxSold'));
     }
 
     /**
@@ -33,7 +41,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request): RedirectResponse
     {
         $this->product->create($request->all());
         return redirect()->route('products.index');
@@ -50,24 +58,26 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return redirect()->route('products.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
