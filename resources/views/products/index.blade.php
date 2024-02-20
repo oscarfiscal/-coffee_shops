@@ -22,7 +22,7 @@
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="table-responsive-sm table-responsive-md">
-                    <h2 class="text-3xl font-semibold mb-6">Información sobre Productos</h2> <!-- Título agregado -->
+                        <h2 class="text-3xl font-semibold mb-6">Información sobre Productos</h2> <!-- Título agregado -->
                         <a type="button" href="{{ route('products.create') }}" style="float: right;" class="bg-indigo-600 px-12 py-2 rounded text-gray-200 font-semibold hover:bg-indigo-800 transition duration-200 each-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                 <path d="M7.5 1a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM8 7V4h1v3h3v1H9v3H8V8H5V7h3z" />
@@ -83,30 +83,30 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            {!! $products->links() !!}
                         </table>
                         <!-- Agregar tarjeta para mostrar información -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="bg-gray-800 text-white border border-gray-600 p-4 rounded-md">
-        @if($productMaxStock)
-            <h3 class="text-lg font-semibold mb-2">Producto con más stock</h3>
-            <p class="mb-1"><span class="font-semibold">Nombre:</span> {{ $productMaxStock->name }}</p>
-            <p><span class="font-semibold">Stock:</span> {{ $productMaxStock->stock }}</p>
-        @else
-            <p class="text-lg font-semibold">No hay información disponible sobre el producto con más stock.</p>
-        @endif
-    </div>
-    <div class="bg-gray-800 text-white border border-gray-600 p-4 rounded-md">
-        @if($productMaxSold)
-            <h3 class="text-lg font-semibold mb-2">Producto más vendido</h3>
-            <p class="mb-1"><span class="font-semibold">Nombre:</span> {{ $productMaxSold->product->name }}</p>
-            <p><span class="font-semibold">Total de ventas:</span> {{ $productMaxSold->total_sales }}</p>
-        @else
-            <p class="text-lg font-semibold">No hay información disponible sobre el producto más vendido.</p>
-        @endif
-    </div>
-</div>
+                            <div class="bg-gray-800 text-white border border-gray-600 p-4 rounded-md">
+                                @if($productMaxStock)
+                                <h3 class="text-lg font-semibold mb-2">Producto con más stock</h3>
+                                <p class="mb-1"><span class="font-semibold">Nombre:</span> {{ $productMaxStock->name }}</p>
+                                <p><span class="font-semibold">Stock:</span> {{ $productMaxStock->stock }}</p>
+                                @else
+                                <p class="text-lg font-semibold">No hay información disponible sobre el producto con más stock.</p>
+                                @endif
+                            </div>
+                            <div class="bg-gray-800 text-white border border-gray-600 p-4 rounded-md">
+                                @if($productMaxSold)
+                                <h3 class="text-lg font-semibold mb-2">Producto más vendido</h3>
+                                <p class="mb-1"><span class="font-semibold">Nombre:</span> {{ $productMaxSold->product->name }}</p>
+                                <p><span class="font-semibold">Total de ventas:</span> {{ $productMaxSold->total_sales }}</p>
+                                @else
+                                <p class="text-lg font-semibold">No hay información disponible sobre el producto más vendido.</p>
+                                @endif
+                            </div>
+                        </div>
 
-                        {!! $products->links() !!}
                     </div>
                 </div>
             </div>
