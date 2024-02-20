@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+use App\Models\Sale;
+use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,13 +17,17 @@ class ProductController extends Controller
      */
 
     public function __construct(
-        private Product $product
+        private Product $product,
+        private ProductService $productService
     ) {
     }
     public function index(): View
     {
+        $productMaxStock = $this->productService->getProductWithMaxStock();
+        $productMaxSold = $this->productService->getProductWithMaxSales();
+
         $products = Product::paginate(5);
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'productMaxStock', 'productMaxSold'));
     }
 
     /**
