@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SellProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('/products', ProductController::class);
+Route::get('/stock', [SellProductController::class, 'showView'])->name('stock');
