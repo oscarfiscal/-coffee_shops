@@ -60,7 +60,7 @@
                                     <td scope="row">{{$product->weight}}</td>
                                     <td scope="row">{{$product->category}}</td>
                                     <td scope="row">{{$product->stock}}</td>
-                                    <td scope="row">{{$product->created_at}}</td>
+                                    <td scope="row">{{ $product->created_at->format('d/m/Y') }}</td>
                                     <td scope="row">
                                         <div class="flex">
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary mr-2">
@@ -82,11 +82,10 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                {!! $products->links() !!}
                             </tbody>
-                          
+                           
                         </table>
-                        {!! $products->links() !!}
-                    </div>
                         <!-- Agregar tarjeta para mostrar información -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-800 text-white border border-gray-600 p-4 rounded-md">

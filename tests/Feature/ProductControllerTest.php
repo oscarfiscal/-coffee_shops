@@ -15,8 +15,6 @@ class ProductControllerTest extends TestCase
      */
     public function testIndex()
     {
-        // Crear algunos datos de prueba
-        
 
         $response = $this->get(route('products.index'));
 

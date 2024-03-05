@@ -6,6 +6,7 @@ use App\Http\Requests\SaleRequest;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Services\SaleService;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 
 class SaleProductController extends Controller
@@ -40,7 +41,8 @@ class SaleProductController extends Controller
             return Redirect::back()->with('error', 'No hay suficiente stock disponible para esta venta.');
         }
 
-        $saleService->createSale($product, $quantitySold,$request);
+        $saleService->createSale($product, $quantitySold, $request);
+
         return redirect()->route('products.index')->with('success', '¡La venta se ha realizado con éxito!');
     }
 }
