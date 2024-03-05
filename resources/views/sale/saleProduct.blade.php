@@ -36,7 +36,10 @@
                     </div>
                     <div class="mb-3" id="cantidadVenta" style="display: none;">
                         <label for="cantidadVentaInput" class="form-label">Cantidad a vender:</label>
-                        <input type="number" class="form-control" id="cantidadVentaInput" name="quantity" placeholder="Cantidad a vender" min="1" required>
+                        <input type="number" class="form-control" id="cantidadVentaInput" name="quantity" placeholder="Cantidad a vender">
+                        @if ($errors->has('quantity'))
+                                <p class="text-red-500 text-xs italic mt-1">{{ $errors->first('quantity') }}</p>
+                        @endif
                     </div>
                     <div id="errorStock" class="alert alert-danger" style="display: none;">
                         No hay suficiente stock disponible para esta venta.
@@ -65,6 +68,7 @@
             document.getElementById('errorStock').style.display = 'block';
         }
     });
+    
 </script>
 
 </html>

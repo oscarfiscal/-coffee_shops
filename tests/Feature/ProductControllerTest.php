@@ -9,14 +9,14 @@ use App\Models\Product;
 
 class ProductControllerTest extends TestCase
 {
-    
+
     /**
      * Test for index method.
      */
     public function testIndex()
     {
         // Crear algunos datos de prueba
-        Product::factory()->count(10)->create();
+        
 
         $response = $this->get(route('products.index'));
 
@@ -31,9 +31,25 @@ class ProductControllerTest extends TestCase
      * Test for create method.
      */
     public function testCreate()
-    {  
+    {
         $response = $this->get(route('products.create'));
         $response->assertStatus(200);
         $response->assertViewIs('products.create');
     }
+
+    public function test_it_deletes_a_product()
+    {
+        $this->withoutMiddleware();
+        $product = Product::factory()->create();
+
+        $this->assertDatabaseHas('products', [
+            'id' => $product->id,
+        ]);
+
+        $response = $this->delete(route('products.destroy', $product));
+
+        $response->assertRedirect(route('products.index'));
+    }
+
+    
 }

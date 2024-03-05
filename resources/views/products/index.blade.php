@@ -83,8 +83,10 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            {!! $products->links() !!}
+                          
                         </table>
+                        {!! $products->links() !!}
+                    </div>
                         <!-- Agregar tarjeta para mostrar información -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-800 text-white border border-gray-600 p-4 rounded-md">
